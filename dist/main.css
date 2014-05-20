@@ -1,6 +1,16 @@
 img {
   max-width: 100%;
 }
+/* Let's make sure all tables have defaults */
+table {
+  border-collapse: collapse;
+}
+table td {
+  vertical-align: top;
+}
+/* -------------------------------------
+    BODY & CONTAINER
+------------------------------------- */
 body {
   margin: 0;
   padding: 0;
@@ -13,18 +23,7 @@ body {
   width: 100% !important;
   height: 100%;
   line-height: 1.6;
-}
-/* Let's make sure all tables have defaults */
-table {
-  border-collapse: collapse;
-}
-table td {
-  vertical-align: top;
-}
-/* -------------------------------------
-    BODY & CONTAINER
-------------------------------------- */
-body {
+  color: red !important;
   background-color: #f6f6f6;
 }
 .body-wrap {

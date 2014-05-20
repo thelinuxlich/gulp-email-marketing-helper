@@ -21,6 +21,8 @@
         "gulp-wrap": "*",
         "run-sequence": "*",
         "gulp-inject": "*",
-        "gulp-template": "*"
+        "gulp-template": "*",
+        "tiny-lr": "*",
+        "gulp-embedlr": "*"
     }
 }

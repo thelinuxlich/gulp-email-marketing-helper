@@ -16,7 +16,10 @@ var paths = {
     notify = require("gulp-notify"),
     template = require("gulp-template"),
     fs = require("fs"),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    lr = require('tiny-lr'),
+    embedlr = require("gulp-embedlr"),
+    server = lr();
 
 gulp.task('less', function() {
     return pipe(
@@ -50,6 +53,14 @@ gulp.task('wrap', function() {
     );
 });
 
+gulp.task('livereload', function() {
+    server.listen(35729, function(err) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+});
+
 gulp.task("inline-css", function() {
     return pipe(
         gulp.src(paths.dist + "/email.html"),
@@ -63,10 +74,27 @@ gulp.task("inline-css", function() {
     );
 });
 
-gulp.task('watch', function() {
-    gulp.watch(paths.src.less, runSequence('less', 'responsive-less', 'wrap'));
+gulp.task("inline-css-debug", function() {
+    return pipe(
+        gulp.src(paths.dist + "/email.html"),
+        embedlr(),
+        rename("email_debug.html"),
+        gulp.dest(paths.dist)
+    );
 });
 
-gulp.task('dev', ['watch']);
+gulp.task('watch', function() {
+    gulp.watch(paths.src.less + "/**/*.less", function() {
+        runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
+    });
+    gulp.watch(paths.src.html + "/default.html", function() {
+        runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
+    });
+    gulp.watch(paths.dist + "/email_debug.html").on('change', function(file) {
+        server.changed(file.path);
+    });
+});
 
-gulp.task('build', runSequence('less', 'responsive-less', 'wrap', "inline-css"));
+gulp.task('dev', ['livereload', 'watch']);
+
+gulp.task('build', runSequence('less', 'responsive-less', 'wrap', "inline-css", "inline-css-debug"));
