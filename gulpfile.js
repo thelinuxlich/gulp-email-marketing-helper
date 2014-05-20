@@ -87,7 +87,10 @@ gulp.task('watch', function() {
     gulp.watch(paths.src.less + "/**/*.less", function() {
         runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
     });
-    gulp.watch(paths.src.html + "/default.html", function() {
+    gulp.watch(paths.src.html + "/" + gulp.env.file + ".html", function() {
+        runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
+    });
+    gulp.watch(paths.src.layout + "/default.html", function() {
         runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
     });
     gulp.watch(paths.dist + "/email_debug.html").on('change', function(file) {
