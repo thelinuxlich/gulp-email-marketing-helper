@@ -2,6 +2,8 @@
 
 * Install Node.js
 * Install Growl(if Windows)
+* Install Python 2.7: https://www.python.org/downloads/
+* Install Visual C++ 2010 Express(if Windows): http://go.microsoft.com/?linkid=9709949
 * npm install -g gulp
 * go the project root
 * npm install
