@@ -1,0 +1,26 @@
+{
+    "name": "gulp-mailhelper",
+    "version": "0.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "gulp": "*",
+        "gulp-concat": "*",
+        "gulp-rename": "*",
+        "multipipe": "*",
+        "gulp-less": "*",
+        "gulp-autoprefixer": "*",
+        "gulp-clean": "*",
+        "gulp-notify": "*",
+        "gulp-inline-css": "*",
+        "gulp-wrap": "*",
+        "run-sequence": "*",
+        "gulp-inject": "*",
+        "gulp-template": "*"
+    }
+}
