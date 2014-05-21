@@ -24,6 +24,7 @@
         "gulp-template": "*",
         "gulp-changed": "*",
         "gulp-css-url-adjuster": "*",
+        "gulp-prefix": "*",
         "gulp-if": "*",
         "tiny-lr": "*",
         "gulp-livereload": "*",
