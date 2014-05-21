@@ -3,8 +3,10 @@ var paths = {
         less: "./src/less",
         html: "./src/html/emails",
         layout: "./src/html/layouts",
+        images: "./src/img/**/*"
     },
-    dist: "./dist"
+    dist: "./dist",
+    url_css: "http://www.google.com"
 },
     gulp = require('gulp'),
     less = require('gulp-less'),
@@ -16,10 +18,13 @@ var paths = {
     notify = require("gulp-notify"),
     template = require("gulp-template"),
     fs = require("fs"),
+    changed = require("gulp-changed"),
     runSequence = require('run-sequence'),
     lr = require('tiny-lr'),
     embedlr = require("gulp-embedlr"),
     livereload = require('gulp-livereload'),
+    urlAdjuster = require('gulp-css-url-adjuster'),
+    gulpif = require('gulp-if'),
     server = lr();
 
 gulp.task('less', function() {
@@ -28,6 +33,9 @@ gulp.task('less', function() {
         less(),
         prefixer('last 2 versions', 'ie 8'),
         concat("main.css"),
+        gulpif( !! gulp.env.external, urlAdjuster({
+            prepend: paths.url_css
+        })),
         gulp.dest("./dist")
     );
 });
@@ -88,18 +96,26 @@ gulp.task("inline-css-debug", function() {
     );
 });
 
+gulp.task('images', function() {
+    return pipe(
+        gulp.src(paths.src.images),
+        changed(paths.dist),
+        gulp.dest(paths.dist)
+    );
+});
+
 gulp.task('watch', function() {
     gulp.watch(paths.src.less + "/**/*.less", function() {
-        runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
+        runSequence(['images'], 'less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
     });
     gulp.watch(paths.src.html + "/" + gulp.env.file + ".html", function() {
-        runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
+        runSequence(['images'], 'less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
     });
     gulp.watch(paths.src.layout + "/default.html", function() {
-        runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
+        runSequence(['images'], 'less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
     });
 });
 
 gulp.task('dev', ['livereload', 'watch']);
 
-gulp.task('build', runSequence('less', 'responsive-less', 'wrap', "inline-css", "inline-css-debug"));
+gulp.task('build', runSequence(['images'], 'less', 'responsive-less', 'wrap', "inline-css", "inline-css-debug"));

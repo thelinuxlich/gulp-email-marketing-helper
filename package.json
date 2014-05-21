@@ -22,6 +22,9 @@
         "run-sequence": "*",
         "gulp-inject": "*",
         "gulp-template": "*",
+        "gulp-changed": "*",
+        "gulp-css-url-adjuster": "*",
+        "gulp-if": "*",
         "tiny-lr": "*",
         "gulp-livereload": "*",
         "gulp-embedlr": "*"
