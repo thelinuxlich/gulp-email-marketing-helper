@@ -1,13 +1,14 @@
 {
-    "name": "gulp-mailhelper",
-    "version": "0.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+    "name": "gulp-email-marketing-helper",
+    "version": "0.9",
+    "description": "A Gulp task for generating HTML with inline CSS(compiled from LESS) ",
+    "main": "gulpfile.js",
+    "author": "Alisson Cavalcante Agiani",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/thelinuxlich/gulp-email-marketing-helper.git"
     },
-    "author": "",
-    "license": "ISC",
     "dependencies": {
         "gulp": "*",
         "gulp-concat": "*",
