@@ -66,7 +66,16 @@ gulp.task('wrap', function() {
 gulp.task('rewrite-html', function() {
     return pipe(
         gulp.src(paths.dist + "/email.html"),
-        gulpif( !! gulp.env.external, prefix(paths.url)),
+        gulpif( !! gulp.env.external, prefix(paths.url, [{
+            match: "img[src]",
+            attr: "src"
+        }, {
+            match: "input[src]",
+            attr: "src"
+        }, {
+            match: "img[data-ng-src]",
+            attr: "data-ng-src"
+        }])),
         gulp.dest(paths.dist)
     );
 });
