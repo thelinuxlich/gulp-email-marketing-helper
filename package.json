@@ -23,6 +23,7 @@
         "gulp-inject": "*",
         "gulp-template": "*",
         "tiny-lr": "*",
+        "gulp-livereload": "*",
         "gulp-embedlr": "*"
     }
 }

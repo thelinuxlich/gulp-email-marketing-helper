@@ -19,6 +19,7 @@ var paths = {
     runSequence = require('run-sequence'),
     lr = require('tiny-lr'),
     embedlr = require("gulp-embedlr"),
+    livereload = require('gulp-livereload'),
     server = lr();
 
 gulp.task('less', function() {
@@ -79,7 +80,9 @@ gulp.task("inline-css-debug", function() {
         gulp.src(paths.dist + "/email.html"),
         embedlr(),
         rename("email_debug.html"),
-        gulp.dest(paths.dist)
+        gulp.dest(paths.dist),
+        livereload(server),
+        notify("[EMAIL] OK")
     );
 });
 
@@ -92,9 +95,6 @@ gulp.task('watch', function() {
     });
     gulp.watch(paths.src.layout + "/default.html", function() {
         runSequence('less', 'responsive-less', 'wrap', 'inline-css', 'inline-css-debug');
-    });
-    gulp.watch(paths.dist + "/email_debug.html").on('change', function(file) {
-        server.changed(file.path);
     });
 });
 
