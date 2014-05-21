@@ -78,7 +78,9 @@ gulp.task("inline-css", function() {
 gulp.task("inline-css-debug", function() {
     return pipe(
         gulp.src(paths.dist + "/email.html"),
-        embedlr(),
+        embedlr({
+            src: "http://localhost:35729/livereload.js?snipver=1"
+        }),
         rename("email_debug.html"),
         gulp.dest(paths.dist),
         livereload(server),
