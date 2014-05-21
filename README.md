@@ -9,5 +9,5 @@
 * npm install
 * change assets path where needed in gulpfile.js
 * gulp build --file confirm (or any file on src/html/emails)
-* gulp dev (for watching changes)
+* gulp dev --file confirm (for watching changes)
 * The routine for using this project would be to point your web server to the dist folder, open dist/email_debug.html(which has LiveReload script), edit less and html files and see the changes occurring instantly, then use dist/email.html in production
